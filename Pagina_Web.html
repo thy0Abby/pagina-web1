@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulce Atardecer</title>
+
+    <!-- FAVICON -->
+    <link rel="icon" href="../img/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/pagina_web.css">
+</head>
+
+<body>
+    <!-- ===== TOPBAR ===== -->
+    <div class="topbar">
+        <div class="top-left">
+            <a href="mailto:pedidos@dulce.com"><iconify-icon icon="lucide:mail"></iconify-icon> pedidos@dulce.com</a>
+            <a href="tel:+51975734099"><iconify-icon icon="lucide:phone"></iconify-icon> 975 734 099</a>
+        </div>
+        <div class="top-right">
+            <a href="https://www.instagram.com/thy.abby/" target="_blank" title="Instagram"><iconify-icon
+                    icon="mdi:instagram"></iconify-icon></a>
+            <a href="https://www.facebook.com/abby.tnt.2025" target="_blank" title="Facebook"><iconify-icon
+                    icon="mdi:facebook"></iconify-icon></a>
+            <a href="https://wa.me/51975734099" target="_blank" title="WhatsApp"><iconify-icon
+                    icon="mdi:whatsapp"></iconify-icon></a>
+        </div>
+    </div>
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+        <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            Dulce Atardecer
+        </div>
+
+        <!-- BUSCADOR -->
+        <div class="search-wrapper" id="searchWrapper">
+            <div class="search-bar" id="searchBar">
+                <iconify-icon icon="lucide:search" class="search-icon" id="searchIcon"></iconify-icon>
+                <input type="text" id="searchInput" placeholder="Buscar..." oninput="buscarConSugerencias(this.value)"
+                    autocomplete="off">
+                <button class="search-close-btn" id="searchCloseBtn" onclick="contraerBuscador()">
+                    <iconify-icon icon="lucide:x"></iconify-icon>
+                </button>
+            </div>
+            <div class="search-results-dropdown" id="searchResults"></div>
+        </div>
+
+        <nav id="navMenu">
+            <!-- BOTÓN DE CIERRE - ARRIBA A LA DERECHA -->
+            <a href="#inicio" onclick="cerrarMenu()">
+                <iconify-icon icon="lucide:home"></iconify-icon> Inicio
+            </a>
+            <a href="#productos" onclick="cerrarMenu()">
+                <iconify-icon icon="lucide:sparkles"></iconify-icon> Carta
+            </a>
+            <a href="#nosotros" onclick="cerrarMenu()">
+                <iconify-icon icon="lucide:users"></iconify-icon> Nosotros
+            </a>
+            <a href="#contacto" onclick="cerrarMenu()">
+                <iconify-icon icon="lucide:phone"></iconify-icon> Contacto
+            </a>
+        </nav>
+
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Cambiar tema">
+                <iconify-icon icon="lucide:moon" id="themeIcon"></iconify-icon>
+            </button>
+            <div class="cart-icon" onclick="toggleCart()" title="Ver carrito">
+                <iconify-icon icon="lucide:shopping-bag"></iconify-icon>
+                <span id="contador">0</span>
+                <span class="cart-label">Carrito</span>
+            </div>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('../img/fondo.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('../img/fondo2.png')"></div>
+            <div class="hero-slide" style="background-image: url('../img/fondo3.png')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Endulzamos tus <span>mejores momentos</span></h1>
+                <p>Tortas, cheesecakes y postres para cada ocasión especial</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="scrollProductos()">VER PRODUCTOS</button>
+                    <a href="https://wa.me/51975734099" target="_blank" class="btn-secondary">
+                        <iconify-icon icon="mdi:whatsapp"></iconify-icon> PEDIR AHORA
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-dots" id="slideDots">
+            <span class="dot active" onclick="irSlide(0)"></span>
+            <span class="dot" onclick="irSlide(1)"></span>
+            <span class="dot" onclick="irSlide(2)"></span>
+        </div>
+    </section>
+    <!-- ===== CATEGORIAS MEJORADAS - EXPLORA ARRIBA ===== -->
+    <section class="categorias-premium" id="categorias">
+        <div class="categorias-header">
+            <span class="categorias-subtitle">✦ EXPLORA ✦</span>
+            <h2>Nuestras <span class="highlight">categorías</span></h2>
+            <p class="categorias-desc">Encuentra el postre perfecto para cada ocasión</p>
+        </div>
+
+        <div class="categorias-grid-premium">
+            <div class="categoria-premium-card" onclick="filtrar('torta')" data-cat="torta">
+                <div class="categoria-premium-bg" style="background-image: url('../img/tortascategoria.jpg')">
+                    <div class="categoria-premium-overlay"></div>
+                </div>
+                <div class="categoria-premium-content">
+                    <h3>🎂 Tortas</h3>
+                    <p>Bizcochos artesanales para celebrar</p>
+                    <div class="categoria-premium-meta">
+                        <span>4 productos</span>
+                        <span>★ 4.9</span>
+                    </div>
+                    <button class="categoria-premium-btn">Ver productos →</button>
+                </div>
+            </div>
+
+            <div class="categoria-premium-card" onclick="filtrar('cheesecake')" data-cat="cheesecake">
+                <div class="categoria-premium-bg" style="background-image: url('../img/cheesecakecategoria.jpg')">
+                    <div class="categoria-premium-overlay"></div>
+                </div>
+                <div class="categoria-premium-content">
+                    <h3>🧀 Cheesecakes</h3>
+                    <p>Cremosos y refrescantes</p>
+                    <div class="categoria-premium-meta">
+                        <span>4 productos</span>
+                        <span>★ 4.8</span>
+                    </div>
+                    <button class="categoria-premium-btn">Ver productos →</button>
+                </div>
+            </div>
+
+            <div class="categoria-premium-card" onclick="filtrar('galleta')" data-cat="galleta">
+                <div class="categoria-premium-bg" style="background-image: url('../img/galletas.jpg')">
+                    <div class="categoria-premium-overlay"></div>
+                </div>
+                <div class="categoria-premium-content">
+                    <h3>🍪 Galletas</h3>
+                    <p>Crocantes y recién horneadas</p>
+                    <div class="categoria-premium-meta">
+                        <span>3 productos</span>
+                        <span>★ 5.0</span>
+                    </div>
+                    <button class="categoria-premium-btn">Ver productos →</button>
+                </div>
+            </div>
+
+            <div class="categoria-premium-card" onclick="filtrar('cupcake')" data-cat="cupcake">
+                <div class="categoria-premium-bg" style="background-image: url('../img/cupcakecategoria.jpg')">
+                    <div class="categoria-premium-overlay"></div>
+                </div>
+                <div class="categoria-premium-content">
+                    <h3>🧁 Postres</h3>
+                    <p>Porciones individuales para disfrutar</p>
+                    <div class="categoria-premium-meta">
+                        <span>6 productos</span>
+                        <span>★ 4.9</span>
+                    </div>
+                    <button class="categoria-premium-btn">Ver productos →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-filtro-activo" id="catFiltroActivo" style="display:none">
+            <span id="catFiltroLabel"></span>
+            <button onclick="verTodos()">Ver todos <iconify-icon icon="lucide:x"></iconify-icon></button>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTOS ===== -->
+    <section class="productos-section" id="productos">
+        <div class="section-title">
+            <h2 id="tituloProductos">Productos Destacados</h2>
+            <p class="section-sub">Los favoritos de nuestros clientes</p>
+        </div>
+        <div class="productos-grid" id="productosContainer"></div>
+        <div class="no-resultados" id="noResultados" style="display:none">
+            <iconify-icon icon="lucide:search"></iconify-icon>
+            <p>No encontramos productos con ese nombre.</p>
+            <button onclick="verTodos()">Ver todos los productos</button>
+        </div>
+    </section>
+
+    <!-- ===== MODAL PRODUCTO MEJORADO ===== -->
+    <div class="modal" id="modal" onclick="cerrarModalFuera(event)">
+        <div class="modal-content">
+            <button class="cerrar" onclick="cerrarModal()" aria-label="Cerrar">✕</button>
+
+            <button class="modal-carousel-btn modal-prev" onclick="navegarProducto(-1)" title="Producto anterior">
+                <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+            </button>
+            <button class="modal-carousel-btn modal-next" onclick="navegarProducto(1)" title="Producto siguiente">
+                <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+            </button>
+
+            <div class="modal-carousel-indicator">
+                <span id="modalPosicionActual">1</span> / <span id="modalTotalProductos">0</span>
+            </div>
+
+            <div class="modal-left">
+                <div class="modal-img-wrapper">
+                    <div class="modal-gallery-container">
+                        <img id="modalImg" alt="Producto" class="modal-gallery-main">
+                        <span class="modal-img-badge" id="modalCategoriaBadge">Tortas</span>
+                        <span class="modal-popular-badge" id="modalPopularBadge" style="display:none;">⭐ Popular</span>
+                        <div class="modal-quick-facts" id="modalQuickFacts">
+                            <span><iconify-icon icon="lucide:users"></iconify-icon> 10-12</span>
+                            <span><iconify-icon icon="lucide:scale"></iconify-icon> 1.8 kg</span>
+                            <span><iconify-icon icon="lucide:clock"></iconify-icon> 24h</span>
+                        </div>
+                    </div>
+                    <div class="modal-mobile-nav">
+                        <button onclick="navegarProducto(-1)">‹</button>
+                        <button onclick="navegarProducto(1)">›</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-right">
+                <div class="modal-header">
+                    <h2 id="modalNombre">Torta Chocolate</h2>
+                    <p class="modal-desc" id="modalDesc">Bizcocho húmedo de cacao intenso con relleno de ganache de
+                        chocolate belga y cobertura de buttercream artesanal.</p>
+                    <div class="modal-rating" id="modalRating">
+                        <span class="rating-stars-modal" id="modalRatingStars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-val" id="modalRatingVal">4.9</span>
+                        <span class="rating-rev" id="modalRatingRev">(128 reseñas)</span>
+                    </div>
+                </div>
+
+                <!-- TABS -->
+                <div class="modal-tabs">
+                    <button class="modal-tab active" onclick="mostrarInfo('detalles')" data-tab="detalles">
+                        <iconify-icon icon="lucide:info"></iconify-icon> Detalles
+                    </button>
+                    <button class="modal-tab" onclick="mostrarInfo('ingredientes')" data-tab="ingredientes">
+                        <iconify-icon icon="lucide:leaf"></iconify-icon> Ingredientes
+                    </button>
+                    <button class="modal-tab" onclick="mostrarInfo('alergenos')" data-tab="alergenos">
+                        <iconify-icon icon="lucide:triangle-alert"></iconify-icon> Alérgenos
+                    </button>
+                </div>
+
+                <!-- PANEL DE INFORMACIÓN MEJORADO -->
+                <div class="modal-panel">
+                    <div class="modal-panel-content" id="infoPanelContent"></div>
+                </div>
+
+                <!-- PERSONALIZACIÓN - HORIZONTAL -->
+                <div class="modal-personalizacion-wrapper" id="personalizacionToggleSection" style="display:none">
+                    <div class="modal-personalizacion-toggle">
+                        <div class="toggle-left">
+                            <iconify-icon icon="lucide:pen-line"></iconify-icon>
+                            <span>Personalizar mi pedido</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="togglePersonalizacion" onchange="togglePersonalizacionSwitch()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="modal-personalizacion-fields" id="modalPersonalizacion" style="display:none">
+                        <div class="personalizacion-fields-row">
+                            <div class="personalizacion-field">
+                                <label>✏️ Dedicatoria especial</label>
+                                <input type="text" id="modalDedicatoria" placeholder="Ej: ¡Feliz cumpleaños María! 🥰"
+                                    maxlength="100">
+                            </div>
+                            <div class="personalizacion-field">
+                                <label>📝 Detalles adicionales</label>
+                                <textarea id="modalDetalles" rows="2"
+                                    placeholder="Ej: Sin azúcar, color celeste, con frutas..."></textarea>
+                            </div>
+                        </div>
+                        <p class="personalizacion-ayuda">
+                            <iconify-icon icon="lucide:info"></iconify-icon>
+                            Completa los campos para agregar tu toque personal
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer">
+                    <div class="modal-price-section">
+                        <div class="modal-price">
+                            <span class="price-label">PRECIO POR UNIDAD</span>
+                            <div class="price-row">
+                                <span class="price-value" id="modalPrecio">S/50</span>
+                                <span class="price-mayor" id="modalPrecioMayor" style="display:none">
+                                    <iconify-icon icon="lucide:package"></iconify-icon>
+                                    Desde <span id="modalMinMayor">5</span> unidades: S/<span
+                                        id="modalPrecioMayorVal">42</span> c/u
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-quantity">
+                            <button onclick="cambiarCantidadModal(-1)">−</button>
+                            <span id="modalCantidad">1</span>
+                            <button onclick="cambiarCantidadModal(1)">+</button>
+                        </div>
+                    </div>
+                    <button id="btnAgregarModal" class="modal-add-btn">
+                        <iconify-icon icon="lucide:shopping-bag"></iconify-icon>
+                        <span id="btnAgregarTexto">Agregar al carrito · S/50</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CARRITO ===== -->
+    <div class="carrito" id="carrito">
+        <div class="carrito-header">
+            <h2><iconify-icon icon="lucide:shopping-bag"></iconify-icon> Mi carrito</h2>
+            <button onclick="toggleCart()" aria-label="Cerrar carrito">✕</button>
+        </div>
+        <div id="listaCarrito"></div>
+        <div class="carrito-footer">
+            <div class="totales-carrito">
+                <div class="total-row subtotal-row">
+                    <span>Subtotal:</span>
+                    <span>S/<span id="subtotalCarrito">0.00</span></span>
+                </div>
+                <div class="total-row igv-row">
+                    <span>IGV (18%):</span>
+                    <span>S/<span id="igvCarrito">0.00</span></span>
+                </div>
+                <div class="total-row total-final-row">
+                    <span>Total:</span>
+                    <strong>S/<span id="total">0.00</span></strong>
+                </div>
+            </div>
+            <button class="vaciar" onclick="vaciarCarrito()">
+                <iconify-icon icon="lucide:trash-2"></iconify-icon> Vaciar
+            </button>
+            <button class="comprar" onclick="comprar()">
+                <iconify-icon icon="mdi:whatsapp"></iconify-icon> Finalizar
+            </button>
+        </div>
+    </div>
+
+    <div class="carrito-overlay" id="carritoOverlay" onclick="toggleCart()"></div>
+
+    <!-- ===== NOSOTROS ===== -->
+    <section class="nosotros" id="nosotros">
+        <div class="nosotros-container">
+            <div class="nosotros-img">
+                <img src="../img/nosotros.jpg" alt="Nuestro equipo">
+                <div class="img-badge-float">+500 pedidos felices</div>
+            </div>
+            <div class="nosotros-info">
+                <span class="section-mini">Nuestra historia</span>
+                <h2>Creamos experiencias dulces para momentos especiales</h2>
+                <p>
+                    En Dulce Atelier elaboramos postres Gourmet con ingredientes
+                    seleccionados cuidadosamente para brindar sabor, elegancia y
+                    momentos inolvidables en cada celebración.
+                </p>
+                <div class="nosotros-data">
+                    <div class="data-card">
+                        <h3>+500</h3>
+                        <span>Pedidos entregados</span>
+                    </div>
+                    <div class="data-card">
+                        <h3>100%</h3>
+                        <span>Hecho Profesionalmente</span>
+                    </div>
+                    <div class="data-card">
+                        <h3>5★</h3>
+                        <span>Clientes felices</span>
+                    </div>
+                </div>
+                <div class="nosotros-btn-container">
+                    <button class="btn-info-mas" onclick="abrirModalInfo('nosotros-detalle')">
+                        <iconify-icon icon="lucide:info"></iconify-icon>
+                        Conoce más sobre nosotros
+                        <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section class="contacto-section" id="contacto">
+        <div class="contacto-container">
+            <div class="contacto-info">
+                <span class="section-mini">Contáctanos</span>
+                <h2>¿Listo para endulzar tu día?</h2>
+                <p>Estamos aquí para ayudarte con tu pedido. Elige el medio que prefieras.</p>
+
+                <div class="contacto-metodos">
+                    <div class="contacto-metodo">
+                        <div class="metodo-icono"><iconify-icon icon="mdi:whatsapp"></iconify-icon></div>
+                        <div class="metodo-info">
+                            <strong>WhatsApp</strong>
+                            <span>975 734 099</span>
+                            <a href="https://wa.me/51975734099" target="_blank" class="metodo-btn">Escribir ahora</a>
+                        </div>
+                    </div>
+                    <div class="contacto-metodo">
+                        <div class="metodo-icono"><iconify-icon icon="lucide:phone"></iconify-icon></div>
+                        <div class="metodo-info">
+                            <strong>Teléfono</strong>
+                            <span>975 734 099</span>
+                            <a href="tel:+51975734099" class="metodo-btn">Llamar ahora</a>
+                        </div>
+                    </div>
+                    <div class="contacto-metodo">
+                        <div class="metodo-icono"><iconify-icon icon="lucide:mail"></iconify-icon></div>
+                        <div class="metodo-info">
+                            <strong>Correo</strong>
+                            <span>pedidos@dulce.com</span>
+                            <a href="mailto:pedidos@dulce.com" class="metodo-btn">Enviar correo</a>
+                        </div>
+                    </div>
+                    <div class="contacto-metodo">
+                        <div class="metodo-icono"><iconify-icon icon="lucide:map-pin"></iconify-icon></div>
+                        <div class="metodo-info">
+                            <strong>Ubicación</strong>
+                            <span>Pucallpa, Perú</span>
+                            <span class="metodo-horario">Lun - Dom: 7am - 10pm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contacto-btn-container">
+                    <button class="btn-info-mas" onclick="abrirModalInfo('contacto-detalle')">
+                        <iconify-icon icon="lucide:info"></iconify-icon>
+                        Más información de contacto
+                        <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="contacto-mapa">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126799.456456456!2d-74.600000!3d-8.383333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91a9b00000000000%3A0x0000000000000000!2sPucallpa%2C%20Peru!5e0!3m2!1sen!2spe!4v1700000000000"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MODALES INFORMATIVOS - MÁS GRANDES Y HORIZONTALES ===== -->
+    <div class="modal-info-overlay" id="modalInfoOverlay" onclick="cerrarModalInfo()">
+        <div class="modal-info-box modal-info-box-large" onclick="event.stopPropagation()">
+            <button class="modal-info-cerrar" onclick="cerrarModalInfo()">✕</button>
+            <div id="modalInfoContenido"></div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL CONFIRMACIÓN ===== -->
+    <div class="modal-confirmacion" id="modalConfirmacion">
+        <div class="modal-confirmacion-content">
+            <button class="modal-confirmacion-cerrar" onclick="cerrarModalConfirmacion()">✕</button>
+            <div class="modal-confirmacion-icono">
+                <iconify-icon icon="lucide:clipboard-list"></iconify-icon>
+            </div>
+            <h2>Confirmar pedido</h2>
+            <p>Ingresa tus datos para finalizar el pedido</p>
+
+            <form id="formConfirmacion" onsubmit="enviarPedidoConfirmado(event)">
+                <div class="campo-form">
+                    <label>📦 Forma de entrega</label>
+                    <div class="comprobante-toggle">
+                        <button type="button" class="comp-btn active" id="btnDelivery"
+                            onclick="seleccionarEntrega('delivery')">
+                            <iconify-icon icon="lucide:truck"></iconify-icon> Delivery
+                        </button>
+                        <button type="button" class="comp-btn" id="btnRecojo" onclick="seleccionarEntrega('recojo')">
+                            <iconify-icon icon="lucide:store"></iconify-icon> Recojo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="campo-form">
+                    <label>📅 ¿Cuándo lo necesitas?</label>
+                    <div class="comprobante-toggle">
+                        <button type="button" class="comp-btn active" id="btnAhora"
+                            onclick="seleccionarMomento('ahora')">
+                            <iconify-icon icon="lucide:zap"></iconify-icon> Lo antes posible
+                        </button>
+                        <button type="button" class="comp-btn" id="btnProgramado"
+                            onclick="seleccionarMomento('programado')">
+                            <iconify-icon icon="lucide:calendar"></iconify-icon> Programar
+                        </button>
+                    </div>
+                    <div class="campo-programado" id="campoProgramado" style="display:none">
+                        <input type="date" id="fechaProgramada">
+                        <input type="time" id="horaProgramada">
+                    </div>
+                </div>
+
+                <div class="campo-form">
+                    <label>👤 Nombre completo *</label>
+                    <input type="text" id="clienteNombre" placeholder="Ej: María Torres" required>
+                </div>
+                <div class="campo-form">
+                    <label>📱 Teléfono / WhatsApp *</label>
+                    <input type="tel" id="clienteTelefono" placeholder="Ej: 934 367 074" required>
+                </div>
+                <div class="campo-form" id="campoDireccion">
+                    <label>📍 Dirección de entrega *</label>
+                    <input type="text" id="clienteDireccion" placeholder="Ej: Av. San Martín 123, Pucallpa" required>
+                </div>
+
+                <div class="campo-form">
+                    <label>🧾 Tipo de comprobante</label>
+                    <div class="comprobante-toggle">
+                        <button type="button" class="comp-btn active" id="btnBoleta"
+                            onclick="seleccionarComprobante('boleta')">
+                            <iconify-icon icon="lucide:receipt"></iconify-icon> Boleta
+                        </button>
+                        <button type="button" class="comp-btn" id="btnFactura"
+                            onclick="seleccionarComprobante('factura')">
+                            <iconify-icon icon="lucide:file-text"></iconify-icon> Factura
+                        </button>
+                    </div>
+                    <input type="text" id="clienteDocumento" placeholder="DNI (8 dígitos)" maxlength="8">
+                </div>
+
+                <div class="campo-form">
+                    <label>📝 Notas adicionales</label>
+                    <textarea id="clienteNotas" rows="2" placeholder="Instrucciones de entrega..."></textarea>
+                </div>
+                <div class="resumen-pedido-mini" id="resumenPedidoMini"></div>
+                <button type="submit" class="btn-enviar-pedido">
+                    <iconify-icon icon="mdi:whatsapp"></iconify-icon> Enviar pedido
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== BOTÓN AYUDA ===== -->
+    <div class="ayuda-flotante" id="ayudaFlotante">
+        <div class="ayuda-panel" id="ayudaPanel">
+            <div class="ayuda-panel-header">
+                <span><iconify-icon icon="lucide:sparkles"></iconify-icon> ¿En qué te ayudamos?</span>
+                <button onclick="toggleAyudaPanel()">✕</button>
+            </div>
+            <div class="ayuda-panel-opciones">
+                <button class="ayuda-opcion" onclick="abrirModalInfo('faq'); toggleAyudaPanel()">
+                    <iconify-icon icon="lucide:circle-help"></iconify-icon> Preguntas frecuentes
+                </button>
+                <button class="ayuda-opcion" onclick="abrirModalInfo('seguimiento'); toggleAyudaPanel()">
+                    <iconify-icon icon="lucide:package-search"></iconify-icon> Seguir mi pedido
+                </button>
+                <button class="ayuda-opcion" onclick="abrirModalInfo('delivery'); toggleAyudaPanel()">
+                    <iconify-icon icon="lucide:truck"></iconify-icon> Zonas de delivery
+                </button>
+                <a href="https://wa.me/51975734099" target="_blank" class="ayuda-opcion ayuda-opcion-wa">
+                    <iconify-icon icon="mdi:whatsapp"></iconify-icon> WhatsApp
+                </a>
+            </div>
+        </div>
+        <button class="ayuda-burbuja" id="ayudaBurbuja" onclick="toggleAyudaPanel()" title="Ayuda">
+            <iconify-icon icon="lucide:message-circle-question" id="ayudaIcono"></iconify-icon>
+        </button>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-premium">
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C300,80 900,0 1200,40 L1200,0 L0,0 Z" fill="#fcf8f8" />
+            </svg>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <span class="footer-logo-icon">🧁</span>
+                    <h2>Dulce Atelier</h2>
+                </div>
+                <p class="footer-brand-desc">
+                    Endulzamos momentos especiales con postres artesanales hechos con amor y dedicación.
+                    Cada creación es única, como tus celebraciones.
+                </p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/thy.abby/" target="_blank" title="Instagram" class="social-link">
+                        <iconify-icon icon="mdi:instagram"></iconify-icon>
+                    </a>
+                    <a href="https://www.facebook.com/abby.tnt.2025?locale=es_LA" target="_blank" title="Facebook"
+                        class="social-link">
+                        <iconify-icon icon="mdi:facebook"></iconify-icon>
+                    </a>
+                    <a href="https://wa.me/51975734099" target="_blank" title="WhatsApp" class="social-link">
+                        <iconify-icon icon="mdi:whatsapp"></iconify-icon>
+                    </a>
+                    <a href="mailto:pedidos@dulce.com" title="Email" class="social-link">
+                        <iconify-icon icon="lucide:mail"></iconify-icon>
+                    </a>
+                </div>
+                <div class="footer-badges">
+                    <span class="footer-badge">⭐ 5★ Clientes felices</span>
+                    <span class="footer-badge">🏆 +500 pedidos</span>
+                </div>
+            </div>
+
+            <div class="footer-contact">
+                <h3>📞 Contacto</h3>
+                <div class="footer-contact-items">
+                    <a href="tel:+51934367074" class="footer-link-item">
+                        <div class="footer-link-icon">
+                            <iconify-icon icon="lucide:phone"></iconify-icon>
+                        </div>
+                        <div class="footer-link-text">
+                            <span class="footer-link-label">Teléfono</span>
+                            <span class="footer-link-value">934 367 074</span>
+                        </div>
+                    </a>
+                    <a href="mailto:pedidos@dulce.com" class="footer-link-item">
+                        <div class="footer-link-icon">
+                            <iconify-icon icon="lucide:mail"></iconify-icon>
+                        </div>
+                        <div class="footer-link-text">
+                            <span class="footer-link-label">Email</span>
+                            <span class="footer-link-value">pedidos@dulce.com</span>
+                        </div>
+                    </a>
+                    <div class="footer-link-item">
+                        <div class="footer-link-icon">
+                            <iconify-icon icon="lucide:map-pin"></iconify-icon>
+                        </div>
+                        <div class="footer-link-text">
+                            <span class="footer-link-label">Ubicación</span>
+                            <span class="footer-link-value">Pucallpa, Perú</span>
+                        </div>
+                    </div>
+                    <div class="footer-link-item">
+                        <div class="footer-link-icon">
+                            <iconify-icon icon="lucide:clock"></iconify-icon>
+                        </div>
+                        <div class="footer-link-text">
+                            <span class="footer-link-label">Horario</span>
+                            <span class="footer-link-value">Lun - Dom: 7am - 10pm</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://wa.me/51975734099?text=Hola!%20Quiero%20hacer%20un%20pedido%20" target="_blank"
+                    class="footer-wa-btn">
+                    <iconify-icon icon="mdi:whatsapp"></iconify-icon> Pedir por WhatsApp
+                </a>
+            </div>
+
+            <div class="footer-links">
+                <h3>🔗 Enlaces rápidos</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#inicio" onclick="scrollProductos()">Inicio</a></li>
+                    <li><a href="#productos" onclick="scrollProductos()">Nuestros productos</a></li>
+                    <li><a href="#nosotros" onclick="scrollNosotros(event)">Sobre nosotros</a></li>
+                    <li><a href="#" onclick="abrirModalInfo('mision')">Misión y visión</a></li>
+                    <li><a href="#" onclick="abrirModalInfo('delivery')">Zonas de delivery</a></li>
+                    <li><a href="#contacto"
+                            onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-newsletter">
+                <h3>📬 Suscríbete</h3>
+                <p class="footer-newsletter-desc">
+                    Recibe ofertas especiales y novedades directamente en tu correo.
+                </p>
+                <form class="footer-newsletter-form" id="footerNewsletterForm" onsubmit="suscribirNewsletter(event)">
+                    <div class="footer-newsletter-input">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit">
+                            <iconify-icon icon="lucide:send"></iconify-icon>
+                        </button>
+                    </div>
+                </form>
+                <div class="footer-help">
+                    <h4>🆘 ¿Necesitas ayuda?</h4>
+                    <div class="footer-help-links">
+                        <a href="#" onclick="abrirModalInfo('faq')">Preguntas frecuentes</a>
+                        <a href="#" onclick="abrirModalInfo('seguimiento')">Seguir mi pedido</a>
+                        <a href="#" onclick="abrirModalInfo('terminos')">Términos y condiciones</a>
+                        <a href="#" onclick="abrirModalInfo('faq')">Política de privacidad</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <span>© 2026 <strong>Dulce Atelier</strong> | Todos los derechos reservados</span>
+                <span class="footer-bottom-divider">|</span>
+                <span>Hecho con <iconify-icon icon="lucide:heart" style="color:#f08ca0;"></iconify-icon> en Pucallpa,
+                    Perú</span>
+                <span class="footer-bottom-divider">|</span>
+                <span class="footer-bottom-version">Versión 2.0</span>
+            </div>
+            <div class="footer-bottom-payments">
+                <span>Aceptamos:</span>
+                <iconify-icon icon="fa6-brands:cc-visa" title="Visa"></iconify-icon>
+                <iconify-icon icon="fa6-brands:cc-mastercard" title="Mastercard"></iconify-icon>
+                <iconify-icon icon="fa6-brands:cc-amex" title="American Express"></iconify-icon>
+                <iconify-icon icon="fa6-brands:cc-paypal" title="PayPal"></iconify-icon>
+                <span class="payment-yape">Yape</span>
+                <span class="payment-plin">Plin</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <iconify-icon icon="lucide:circle-check"></iconify-icon> Producto agregado al carrito
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
+    <script src="../js/pagina_web.js"></script>
+</body>
+
+</html>
